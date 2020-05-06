@@ -1,0 +1,4 @@
+@PACKAGE_INIT@
+include(${CMAKE_CURRENT_LIST_DIR}/InstinctTargets.cmake)
+set(Instinct_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+set(Instinct_LIBRARIES instinct)

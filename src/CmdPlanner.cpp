@@ -16,14 +16,16 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include <stdafx.h>
+#include "instinct/stdafx.h"
+#include <cstring>
 
-#ifndef _MSC_VER
-#include "Arduino.h"
+#ifdef ARDUINO
+  #include "Arduino.h"
 #endif
 
-#include "Instinct.h"
+#include "instinct/Instinct.h"
 
+using namespace stdafx;
 namespace Instinct {
 
 CmdPlanner::CmdPlanner(instinctID *pPlanSize, Senses *pSenses, Actions *pActions, Monitor *pMonitor)

@@ -15,13 +15,13 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include <stdafx.h>
+#include "instinct/stdafx.h"
 
-#ifndef _MSC_VER
-	#include "Arduino.h"
+#ifdef ARDUINO
+  #include "Arduino.h"
 #endif
 
-#include "Instinct.h"
+#include "instinct/Instinct.h"
 
 namespace Instinct {
 
@@ -35,7 +35,7 @@ Planner::Planner(instinctID *pPlanSize, Senses *pSenses, Actions *pActions, Moni
 // Timers are reset only when expired and tested in checkDriveFreqency()
 
 // RAMP Processing: At each interval, the Runtime_Priority is increased by the Ramp Increment. In addition,
-// once the drive’s sense allows it to be released, the priority is multiplied each ramp interval by the Urgency Multiplier.
+// once the driveï¿½s sense allows it to be released, the priority is multiplied each ramp interval by the Urgency Multiplier.
 // This mimics an exponential increase in drive priority, once the threshold has been reached.
 // Since in the physical implementation the Ramp Multiplier will be a byte(0 - 255), the multiplier value is scaled back by a factor of 32,
 // giving actual factors of 0 to 7, with a resolution of ~0.03.

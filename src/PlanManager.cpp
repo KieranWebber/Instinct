@@ -15,13 +15,15 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include <stdafx.h>
+#include "instinct/stdafx.h"
+#include <cstdlib>
+#include <cstring>
 
-#ifndef _MSC_VER
-	#include "Arduino.h"
+#ifdef ARDUINO
+  #include "Arduino.h"
 #endif
 
-#include "Instinct.h"
+#include "instinct/Instinct.h"
 
 namespace Instinct {
 
@@ -246,7 +248,7 @@ unsigned char PlanManager::initialisePlan(instinctID *pPlanSize)
 			_nPlanSize[i] = 0;
 			_nNodeCount[i] = 0;
 		}
-		unsigned int nSize = *(pPlanSize + i);
+		unsigned int nSize = pPlanSize[i];
 		unsigned int nBuffSize;
 		if (nSize != 0)
 		{
@@ -617,34 +619,36 @@ void PlanManager::countSense(PlanElement *pElement, ReleaserType *pReleaser, con
 // returns zero on error
 int PlanManager::sizeFromNodeType(const unsigned char bNodeType)
 {
-	int nSize;
+    return sizeof(PlanElement);
+	// Temporarily fix incorrect structure size calculation
+	// int nSize;
 
-	switch (bNodeType)
-	{
-	case INSTINCT_ACTION:
-		nSize = sizeof(ActionType);
-		break;
-	case INSTINCT_ACTIONPATTERNELEMENT:
-		nSize = sizeof(ActionPatternElementType);
-		break;
-	case INSTINCT_ACTIONPATTERN:
-		nSize = sizeof(ActionPatternType);
-		break;
-	case INSTINCT_COMPETENCEELEMENT:
-		nSize = sizeof(CompetenceElementType);
-		break;
-	case INSTINCT_COMPETENCE:
-		nSize = sizeof(CompetenceType);
-		break;
-	case INSTINCT_DRIVE:
-		nSize = sizeof(DriveType);
-		break;
+	// switch (bNodeType)
+	// {
+	// case INSTINCT_ACTION:
+	// 	nSize = sizeof(ActionType);
+	// 	break;
+	// case INSTINCT_ACTIONPATTERNELEMENT:
+	// 	nSize = sizeof(ActionPatternElementType);
+	// 	break;
+	// case INSTINCT_ACTIONPATTERN:
+	// 	nSize = sizeof(ActionPatternType);
+	// 	break;
+	// case INSTINCT_COMPETENCEELEMENT:
+	// 	nSize = sizeof(CompetenceElementType);
+	// 	break;
+	// case INSTINCT_COMPETENCE:
+	// 	nSize = sizeof(CompetenceType);
+	// 	break;
+	// case INSTINCT_DRIVE:
+	// 	nSize = sizeof(DriveType);
+	// 	break;
 
-	default:
-		return 0;
-	}
+	// default:
+	// 	return 0;
+	// }
 
-	return (nSize + sizeof(RuntimeReferences) + sizeof(RuntimeCounters));
+	// return (nSize + sizeof(RuntimeReferences) + sizeof(RuntimeCounters));
 }
 
 } // /namespace Instinct
